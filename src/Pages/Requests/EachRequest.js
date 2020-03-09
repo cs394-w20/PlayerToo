@@ -28,7 +28,7 @@ const EachRequest = ({ data, games, users }) => {
     console.log("I approved the Request");
   }
   
-  function DenyRequest({game}) {
+  function DenyRequest() {
     console.log("I denied the Request");
     // console.log(game[0].startDate._seconds)
     // console.log(new Date(game[0].startDate), Date(game[0].startDate))
