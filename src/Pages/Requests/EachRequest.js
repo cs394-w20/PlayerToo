@@ -13,9 +13,10 @@ const EachRequest = ({ data, games, users }) => {
     for (let i = 0; i < data.length; i++) {
       let temp = data[i]["requests"]
       let game = data[i]["game_id"]
+      let listing_id = data[i]["id"]
       //let date = 
       for (let j = 0; j < temp.length; j++) {
-        permittedValues.push([temp[j], game]);
+        permittedValues.push([temp[j], game, listing_id]);
       }
     }
     console.log(permittedValues)
@@ -25,9 +26,29 @@ const EachRequest = ({ data, games, users }) => {
   console.log(eachGameRequests)
   
 
-  function ApproveRequest () {
+  function ApproveRequest ({game}) {
     console.log("I approved the Request");
     // call the function modifyrequest but check the path first
+
+    console.log("I approved the Request");
+    console.log(game)
+    console.log(game)
+    if(game && game[0]){
+      const arr = [game[0].startDate, game[0].duration, game[0].borrower, false]
+      const body = {
+        requests: arr
+      };
+      console.log(body)
+      console.log(eachGameRequests)
+      for(let i = 0; i < eachGameRequests.length; i++)
+      {
+        if(eachGameRequests[i][2] === game[2])
+        {
+          console.log(eachGameRequests[i])
+        }
+      }
+      //modifyRequest(body, game[2])
+    }
   }
   
   function DenyRequest() {
@@ -77,7 +98,7 @@ const EachRequest = ({ data, games, users }) => {
           <Button.Group fluid>
           <Button
             color="yellow"
-            onClick={() => ApproveRequest()
+            onClick={() => ApproveRequest(game={game})
             }
           >
             Approve

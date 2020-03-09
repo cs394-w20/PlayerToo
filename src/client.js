@@ -57,8 +57,8 @@ export const deleteListing = async (id) => {
   console.log('deleted')
 }
 
-export const modifyRequest = async (content, id, index) => {
-  const response = await fetch(`https://playertoo-43706.firebaseapp.com/api/v1/listings/${id}/requests/${index}/isApproved`,
+export const modifyRequest = async (content, id) => {
+  const response = await fetch(`https://playertoo-43706.firebaseapp.com/api/v1/listings/${id}`,
     {
       method: 'PUT',
       body: JSON.stringify(content),
