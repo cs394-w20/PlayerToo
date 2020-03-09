@@ -75,6 +75,8 @@ const EachLenderListing = () => {
 
   // get requests for this particular game
   const gameRequests = myRequests.filter(x => x.game_id === id)[0].requests;
+  console.log(myRequests)
+  console.log(gameRequests)
 
   // // workaround: setting isApproved to null
   // gameRequests.forEach(gr => (gr.isApproved = null));

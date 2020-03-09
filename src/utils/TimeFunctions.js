@@ -24,5 +24,6 @@ export const getDuration = (startDate, duration) => {
     end.getDate().toString() +
     ' ' +
     MONTH[end.getMonth().toString()];
+    console.log(string)
   return string;
 };
