@@ -31,22 +31,34 @@ const EachRequest = ({ data, games, users }) => {
     // call the function modifyrequest but check the path first
 
     console.log("I approved the Request");
-    console.log(game)
-    console.log(game)
+    // console.log(game)
+    // console.log(game)
     if(game && game[0]){
-      const arr = [game[0].startDate, game[0].duration, game[0].borrower, false]
+      //const arr = [game[0].startDate, game[0].duration, game[0].borrower, false]
+      let arr = [];
       const body = {
         requests: arr
       };
-      console.log(body)
-      console.log(eachGameRequests)
+      // console.log(body)
+      // console.log(eachGameRequests)
       for(let i = 0; i < eachGameRequests.length; i++)
       {
         if(eachGameRequests[i][2] === game[2])
         {
           console.log(eachGameRequests[i])
+          if (game[1] === eachGameRequests[i][1])
+          {
+            console.log("HI")
+            console.log(game[1])
+            //eachGameRequests[i][1]
+            // changes
+          }
+          else{
+            arr.push(eachGameRequests[i])
+          }
         }
       }
+      console.log(arr)
       //modifyRequest(body, game[2])
     }
   }
