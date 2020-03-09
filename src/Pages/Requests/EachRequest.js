@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Icon, Header, Button, Image, Grid, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import {getDuration} from '../../utils/TimeFunctions'
+import { modifyRequest} from '../../client';
 
 const EachRequest = ({ data, games, users }) => {
 
@@ -26,6 +27,7 @@ const EachRequest = ({ data, games, users }) => {
 
   function ApproveRequest () {
     console.log("I approved the Request");
+    // call the function modifyrequest but check the path first
   }
   
   function DenyRequest() {

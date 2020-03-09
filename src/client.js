@@ -56,3 +56,18 @@ export const deleteListing = async (id) => {
   console.log(json)
   console.log('deleted')
 }
+
+export const modifyRequest = async (content, id, index) => {
+  const response = await fetch(`https://playertoo-43706.firebaseapp.com/api/v1/listings/${id}/requests/${index}/isApproved`,
+    {
+      method: 'PUT',
+      body: JSON.stringify(content),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
+  const json = await response.json()
+  console.log(json)
+  console.log('changed')
+}
