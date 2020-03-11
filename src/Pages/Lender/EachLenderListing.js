@@ -77,9 +77,6 @@ const EachLenderListing = () => {
 
   const gameRequests = 'requests' in gameRef ? gameRef.requests : [];
 
-  // workaround: setting isApproved to null
-  gameRequests.forEach(gr => (gr.isApproved = null));
-
   // need to hook this up to backend
   description = gameRef.additional_details;
 
