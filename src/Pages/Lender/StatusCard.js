@@ -1,13 +1,78 @@
 import React, { useState } from 'react';
-import { Card, Icon, Button, Image, Header } from 'semantic-ui-react';
+import { Card, Icon, Button, Image, Header, Rating } from 'semantic-ui-react';
 import AcceptModal from './AcceptModal';
 import { getDuration } from '../../utils/TimeFunctions';
+
+const openRateModal = () => {
+  //code for modal here:
+  //TBD: Rating/Reporting - at the end, remove the request from the approved request area
+};
+
+const ConfirmButton = ({ state }) => {
+  let btn = null;
+  switch (state.confirmState) {
+    // Lender confirms passing game to borrower
+    case 0:
+      btn = (
+        <Button fluid color="yellow" onClick={() => state.setConfirmState(1)}>
+          I have passed my game to {state.user.name}
+        </Button>
+      );
+      break;
+    // Confirmation
+    case 1:
+      btn = (
+        <Button.Group fluid>
+          <Button color="yellow" onClick={() => state.setConfirmState(2)}>
+            Confirm lending
+          </Button>
+          <Button color="yellow" basic onClick={() => state.setConfirmState(0)}>
+            Cancel
+          </Button>
+        </Button.Group>
+      );
+      break;
+    // Lender confirms game has been returned
+    case 2:
+      btn = (
+        <Button fluid color="yellow" onClick={() => state.setConfirmState(3)}>
+          {state.user.name} has returned my game
+        </Button>
+      );
+      break;
+    // Confirmation
+    case 3:
+      btn = (
+        <Button.Group fluid>
+          <Button color="yellow" onClick={() => state.setConfirmState(4)}>
+            Confirm return
+          </Button>
+          <Button color="yellow" basic onClick={() => state.setConfirmState(2)}>
+            Cancel
+          </Button>
+        </Button.Group>
+      );
+      break;
+    case 4:
+      btn = (
+        <Button color="yellow" fluid onClick={() => openRateModal()}>
+          Rate {state.user.name}
+        </Button>
+      );
+      break;
+    default:
+      break;
+  }
+  return btn;
+};
 
 // This card shows when on loan
 const OnLoanCard = ({ request, action, setLocation, users }) => {
   const user = users.filter(u => request.borrower === u.id)[0];
 
   const duration = getDuration(request.startDate, request.duration);
+
+  const [confirmState, setConfirmState] = useState(0);
 
   function launchModal() {
     action(true);
@@ -20,7 +85,7 @@ const OnLoanCard = ({ request, action, setLocation, users }) => {
         <Image circular floated="right" size="mini" src={user.display_pic} />
         <Card.Header>{user.name}</Card.Header>
         <Card.Meta>
-          <Icon name="star" /> {user.rating.toFixed(2)}
+          <Rating defaultRating={user.rating} maxRating="5" disabled />
         </Card.Meta>
         <Card.Description>Duration:</Card.Description>
         <Card.Description as={Header.Subheader}>{duration}</Card.Description>
@@ -31,14 +96,12 @@ const OnLoanCard = ({ request, action, setLocation, users }) => {
             : 'Starbucks, 1901 Dempster St'}
         </Card.Description>
       </Card.Content>
-      <Card.Content >
-        <Button fluid color="yellow" basic onClick={() => launchModal()}>
-          Edit additional Details
+      <Card.Content>
+        <Button fluid color="yellow" basic onClick={() => launchModal()} disabled={confirmState > 1}>
+          Edit additional details
         </Button>
         <br />
-        <Button fluid color="yellow" onClick={() => launchModal()}>
-          I have passed my game to {user.name}
-        </Button>
+        <ConfirmButton state={{ confirmState, setConfirmState, user }} />
       </Card.Content>
     </Card>
   );
