@@ -1,14 +1,80 @@
 import React, { useState } from 'react';
-import { Card, Icon, Button, Image, Header, Rating } from 'semantic-ui-react';
+import { Card, Icon, Button, Image, Header, Rating, TextArea, Modal, Grid, Form, Container } from 'semantic-ui-react';
 import AcceptModal from './AcceptModal';
 import { getDuration } from '../../utils/TimeFunctions';
 
-const openRateModal = () => {
-  //code for modal here:
-  //TBD: Rating/Reporting - at the end, remove the request from the approved request area
+const OpenRateModal = ({open, change}) => {
+  
+  function call(event,data){
+    change(false);
+    console.log(data)
+  }
+  console.log(open);
+
+  return( 
+    <div align>
+
+   
+  <Modal open={open}>
+    <Modal.Header>
+      Help Us Help You
+      </Modal.Header>
+      <Modal.Content>
+      <Grid>
+        
+
+<Grid.Row textAlign="center">
+<Grid.Column width={3}>
+      
+      </Grid.Column>
+      <Grid.Column width={3}>
+     
+  <Rating maxRating={5} defaultRating={3} icon='star' size='massive'/>
+  </Grid.Column>
+  <Grid.Column width={3}>
+      
+    </Grid.Column>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Column width={3}>
+
+    </Grid.Column>
+    <Grid.Column width={10}>
+    <Form>
+
+
+  <TextArea placeholder='Please do tell us more! How was this experience?'  />
+  </Form>
+  </Grid.Column>
+  <Grid.Column width={3} >
+      
+    </Grid.Column>
+  </Grid.Row>
+
+  <Grid.Row>
+    <Grid.Column width={5}>
+
+    </Grid.Column>
+    <Grid.Column width={8}>
+   
+
+
+      <Button content="Confirm!" color="yellow" onClick={() => call()}/>
+  </Grid.Column>
+  <Grid.Column width={3} >
+      
+    </Grid.Column>
+  </Grid.Row>
+  </Grid>
+
+  </Modal.Content>
+  
+  </Modal>
+  </div>);
+
 };
 
-const ConfirmButton = ({ state }) => {
+const ConfirmButton = ({ state, trigger }) => {
   let btn = null;
   switch (state.confirmState) {
     // Lender confirms passing game to borrower
@@ -55,7 +121,7 @@ const ConfirmButton = ({ state }) => {
       break;
     case 4:
       btn = (
-        <Button color="yellow" fluid onClick={() => openRateModal()}>
+        <Button color="yellow" fluid onClick={() => trigger(true)}>
           Rate {state.user.name}
         </Button>
       );
@@ -67,7 +133,7 @@ const ConfirmButton = ({ state }) => {
 };
 
 // This card shows when on loan
-const OnLoanCard = ({ request, action, setLocation, users }) => {
+const OnLoanCard = ({ request, action, setLocation, users, setModalRating }) => {
   const user = users.filter(u => request.borrower === u.id)[0];
 
   const duration = getDuration(request.startDate, request.duration);
@@ -101,7 +167,7 @@ const OnLoanCard = ({ request, action, setLocation, users }) => {
           Edit additional details
         </Button>
         <br />
-        <ConfirmButton state={{ confirmState, setConfirmState, user }} />
+        <ConfirmButton state={{ confirmState, setConfirmState, user }} trigger={setModalRating} />
       </Card.Content>
     </Card>
   );
@@ -125,6 +191,9 @@ const AvailableCard = () => {
 const StatusCard = ({ state }) => {
   const approvedRequests = state.requests.filter(x => x.isApproved === true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalRating, setModalRating]=useState(false);
+  const [rating,updateRating]=useState(3);
+
   const [meetUplocation, setmeetUpLocation] = useState(0);
   return approvedRequests.length > 0 ? (
     <div>
@@ -133,6 +202,7 @@ const StatusCard = ({ state }) => {
         setModalOpen={setModalOpen}
         meetUpLocation={meetUplocation}
       />
+      <OpenRateModal open={modalRating} change={setModalRating}></OpenRateModal>
       <Card.Group centered itemsPerRow="1">
         {approvedRequests.map(r => (
           <OnLoanCard
@@ -141,6 +211,7 @@ const StatusCard = ({ state }) => {
             action={setModalOpen}
             setLocation={setmeetUpLocation}
             users={state.users}
+            setModalRating={setModalRating}
           />
         ))}
       </Card.Group>

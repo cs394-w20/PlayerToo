@@ -11,7 +11,6 @@ import { deleteListing } from '../../client';
 const HomePageLender= () => {
   const state = useContext(AppState);
   const { myListings } = state; 
-
   const [modalOpen, setModalOpen]=useState(false)
   const [listingToDelete, setListingToDelete]=useState({});
   const [relevantListings, setRelevantListings] = useState(myListings)
