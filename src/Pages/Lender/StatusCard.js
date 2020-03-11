@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Icon, Button, Image, Header, Rating, TextArea, Modal, Grid, Form, Container } from 'semantic-ui-react';
+import { Card, Icon, Button, Image, Header, Rating, TextArea, Modal, Grid, Form, Container, GridColumn } from 'semantic-ui-react';
 import AcceptModal from './AcceptModal';
 import TextareaAutosize from "react-textarea-autosize";
 import { getDuration } from '../../utils/TimeFunctions';
@@ -18,7 +18,13 @@ const OpenRateModal = ({open, change}) => {
    
   <Modal open={open} align="center" alignContent="center">
     <Modal.Header>
-      Help Us Help You
+      
+
+   
+  Help Us Help You
+     
+      
+     
       </Modal.Header>
       <Modal.Content>
       <Grid>
@@ -54,9 +60,14 @@ const OpenRateModal = ({open, change}) => {
  
   <Modal.Actions>
     <div align="center" style={{alignContent: "center"}}>
+      <Button.Group>
+      
+      <Button content="Confirm!" color="yellow" onClick={() => call()}/>
+      <Button icon="close" onClick={() => call()}></Button>
+
+      </Button.Group>
 
     
-  <Button content="Confirm!" color="yellow" onClick={() => call()}/>
   </div>
 
   </Modal.Actions>
