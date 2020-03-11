@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Icon, Button, Image, Header, Rating, TextArea, Modal, Grid, Form, Container } from 'semantic-ui-react';
 import AcceptModal from './AcceptModal';
+import TextareaAutosize from "react-textarea-autosize";
 import { getDuration } from '../../utils/TimeFunctions';
 
 const OpenRateModal = ({open, change}) => {
@@ -15,59 +16,54 @@ const OpenRateModal = ({open, change}) => {
     <div align>
 
    
-  <Modal open={open}>
+  <Modal open={open} align="center" alignContent="center">
     <Modal.Header>
       Help Us Help You
       </Modal.Header>
       <Modal.Content>
       <Grid>
+        <br></br>
         
 
-<Grid.Row textAlign="center">
+
 <Grid.Column width={3}>
       
       </Grid.Column>
-      <Grid.Column width={3}>
+      <Grid.Column width={10}>
      
   <Rating maxRating={5} defaultRating={0} icon='star' size='massive'/>
   </Grid.Column>
   <Grid.Column width={3}>
       
     </Grid.Column>
-  </Grid.Row>
-  <Grid.Row>
-    <Grid.Column width={3}>
+
+  
+    <Grid.Column width={1}>
 
     </Grid.Column>
-    <Grid.Column width={10}>
+    <Grid.Column width={14}>
     <Form>
-
-
-  <TextArea placeholder='Please do tell us more! How was this experience?'  />
+  <TextArea control={TextareaAutosize} placeholder='Please do tell us more about us and the borrower. Thank you!'  />
   </Form>
   </Grid.Column>
-  <Grid.Column width={3} >
+  <Grid.Column width={2} >
       
     </Grid.Column>
-  </Grid.Row>
-
-  <Grid.Row>
-    <Grid.Column width={5}>
-
-    </Grid.Column>
-    <Grid.Column width={8}>
-   
-
-
-      <Button content="Confirm!" color="yellow" onClick={() => call()}/>
-  </Grid.Column>
-  <Grid.Column width={3} >
-      
-    </Grid.Column>
-  </Grid.Row>
+  
   </Grid>
+ 
+  <Modal.Actions>
+    <div align="center" style={{alignContent: "center"}}>
+
+    
+  <Button content="Confirm!" color="yellow" onClick={() => call()}/>
+  </div>
+
+  </Modal.Actions>
 
   </Modal.Content>
+  
+  
   
   </Modal>
   </div>);
@@ -202,12 +198,13 @@ const StatusCard = ({ state }) => {
         setModalOpen={setModalOpen}
         meetUpLocation={meetUplocation}
       />
-      <OpenRateModal open={modalRating} change={setModalRating} setRequests={state.setRequests} requests={state.requests}></OpenRateModal>
+<OpenRateModal open={modalRating} change={setModalRating} setRequests={state.setRequests} requests={state.requests}></OpenRateModal>
      
       <Card.Group centered itemsPerRow="1">
         
         {approvedRequests.map(r => (
-           
+          <div>
+
           <OnLoanCard
             key={r.borrower}
             request={r}
@@ -216,8 +213,12 @@ const StatusCard = ({ state }) => {
             users={state.users}
             setModalRating={setModalRating}
           />
-        ))}
+          </div>
+
+        ))
+        }
       </Card.Group>
+      
     </div>
   ) : (
     <Card.Group centered itemsPerRow="1">
