@@ -26,41 +26,41 @@ const EachRequest = ({ data, games, users }) => {
   console.log(eachGameRequests)
   
 
-  function ApproveRequest ({game}) {
+  function ApproveRequest () {
     console.log("I approved the Request");
     // call the function modifyrequest but check the path first
 
     console.log("I approved the Request");
     // console.log(game)
     // console.log(game)
-    if(game && game[0]){
-      //const arr = [game[0].startDate, game[0].duration, game[0].borrower, false]
-      let arr = [];
-      const body = {
-        requests: arr
-      };
+    // if(game && game[0]){
+    //   //const arr = [game[0].startDate, game[0].duration, game[0].borrower, false]
+    //   let arr = [];
+    //   const body = {
+    //     requests: arr
+    //   };
       // console.log(body)
       // console.log(eachGameRequests)
-      for(let i = 0; i < eachGameRequests.length; i++)
-      {
-        if(eachGameRequests[i][2] === game[2])
-        {
-          console.log(eachGameRequests[i])
-          if (game[1] === eachGameRequests[i][1])
-          {
-            console.log("HI")
-            console.log(game[1])
-            //eachGameRequests[i][1]
-            // changes
-          }
-          else{
-            arr.push(eachGameRequests[i])
-          }
-        }
-      }
-      console.log(arr)
+      // for(let i = 0; i < eachGameRequests.length; i++)
+      // {
+      //   if(eachGameRequests[i][2] === game[2])
+      //   {
+      //     console.log(eachGameRequests[i])
+      //     if (game[1] === eachGameRequests[i][1])
+      //     {
+      //       console.log("HI")
+      //       console.log(game[1])
+      //       //eachGameRequests[i][1]
+      //       // changes
+      //     }
+      //     else{
+      //       arr.push(eachGameRequests[i])
+      //     }
+      //   }
+      // }
+      // console.log(arr)
       //modifyRequest(body, game[2])
-    }
+    // }
   }
   
   function DenyRequest() {
@@ -110,7 +110,7 @@ const EachRequest = ({ data, games, users }) => {
           <Button.Group fluid>
           <Button
             color="yellow"
-            onClick={() => ApproveRequest(game={game})
+            onClick={() => ApproveRequest()
             }
           >
             Approve
