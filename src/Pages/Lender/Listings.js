@@ -5,7 +5,7 @@ import { AppState } from '../../context';
 
 const Listings = ({ select, items }) => {
   const state = useContext(AppState);
-  const { games } = state;
+  const { games, myRequests } = state;
 
   console.log("this is in Listings.js file");
 
@@ -27,7 +27,7 @@ const Listings = ({ select, items }) => {
                 {!listing.borrowed ? 'Available' : 'On Loan'}
               </Label>
             <Header.Subheader style={{ color: "grey", fontWeight: "bold", fontSize: "12px" }}>
-            1 New Loan Request { listing.borrowed ? <span><Icon style={{marginRight: "0px", marginLeft: "10px", color:"orange"}} name="circle" />  Currently on Loan</span> : ""}
+            {myRequests.filter(x => x.game_id === listing.game_id).length} Loan { myRequests.filter(x => x.game_id === listing.game_id).length === 1 ? "Request": "Requests"} { listing.borrowed ? <span><Icon style={{marginRight: "0px", marginLeft: "10px", color:"orange"}} name="circle" />  Currently on Loan</span> : ""}
             </Header.Subheader> 
             </Header>
             </Grid.Column>

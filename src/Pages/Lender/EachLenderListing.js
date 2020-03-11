@@ -73,7 +73,7 @@ const EachLenderListing = () => {
   const listing = games[games.findIndex(g => g.id === id)];
 
   // get requests for this particular game
-  const gameRef = myRequests.length > 0 ? myRequests.filter(x => x.game_id === id)[0] : [];
+  const gameRef = myRequests.filter(x => x.game_id === id).length > 0 ? myRequests.filter(x => x.game_id === id)[0] : [];
 
   const gameRequests = 'requests' in gameRef ? gameRef.requests : [];
 
