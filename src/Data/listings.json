@@ -6,7 +6,12 @@
       "borrowed": false,
       "additional_details": "",
       "meeting_loc": "1560 Sherman Ave",
-      "requests": []
+      "requests": [{
+        "borrower": "Wood90#+",
+        "isApproved": null,
+        "startDate": {"_seconds":"1000000000"},
+        "duration": "2"
+      }]
     },
     "1": {
       "id": 1,

@@ -45,7 +45,7 @@ const AcceptModal = ({ open, setModalOpen, meetUpLocation }) => {
         
       </Modal.Content>
       <Modal.Actions>
-          <Button content="Confirm!" negative icon="check" onClick={() => setModalOpen(false)}/>
+          <Button content="Confirm!" color="yellow" onClick={() => setModalOpen(false)}/>
       </Modal.Actions>
     </Modal>
   );

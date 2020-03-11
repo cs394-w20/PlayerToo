@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Icon, Button, Image, Header } from 'semantic-ui-react';
+import { Card, Icon, Button, Image, Header, Rating } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import DeclineModal from './DeclineModal';
 import {getDuration} from '../../utils/TimeFunctions'
@@ -80,7 +80,7 @@ const BorrowerCard = ({ request, state }) => {
         <Image circular floated="right" size="mini" src={user.display_pic} />
         <Card.Header>{user.name}</Card.Header>
         <Card.Meta>
-          <Icon name="star" /> {user.rating.toFixed(2)}
+          <Rating defaultRating={user.rating} maxRating="5" disabled />
         </Card.Meta>
         <Card.Description>Duration:</Card.Description>
         <Card.Description as={Header.Subheader}>{duration}</Card.Description>

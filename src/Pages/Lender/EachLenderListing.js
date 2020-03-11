@@ -136,11 +136,11 @@ const EachLenderListing = () => {
             </Grid.Column>
           </Grid.Row>
 
-          {/* Additional Details */}
+          {/* My Remarks */}
           <Grid.Row>
             <Grid.Column>
               <Header>
-                Additional Details
+                My Remarks
                 <Icon
                   style={{ float: 'right' }}
                   name={editingLenderRemarks ? 'close' : 'edit outline'}
