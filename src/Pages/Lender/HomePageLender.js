@@ -13,7 +13,6 @@ const HomePageLender= () => {
   const { myListings, listingCallback } = state; 
   const [modalOpen, setModalOpen] = useState(false)
   const [listingToDelete, setListingToDelete]=useState({});
-  const [relevantListings, setRelevantListings] = useState(myListings)
 
   
   const selectItemToDelete = (listing) => {
@@ -22,8 +21,6 @@ const HomePageLender= () => {
   };
 
   const deleteItem = async (listing) => {
-    const list = relevantListings.filter(listing => listing.id !== listingToDelete.id)
-    setRelevantListings(list);
     await deleteListing(listing.id);
     await getAllListings(listingCallback);
     setModalOpen(false);
@@ -45,7 +42,7 @@ const HomePageLender= () => {
         <Grid.Row>
           <Grid.Column width={16}>
             <DeleteModal open={modalOpen} setModalOpen={setModalOpen} deleteItem={()=> deleteItem(listingToDelete)} />
-            <Listings items={relevantListings} select={selectItemToDelete} />
+            <Listings items={myListings} select={selectItemToDelete} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

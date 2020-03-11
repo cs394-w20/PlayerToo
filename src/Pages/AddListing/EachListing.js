@@ -51,6 +51,7 @@ const EachListing = () => {
             <Grid.Column>
         <Button 
           as={Link}
+          loading={!isReady}
           disabled={!isReady}
           to={'../lender/myListings'}
           color="yellow" 
