@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Icon, Button, Image, Header } from 'semantic-ui-react';
 import AcceptModal from './AcceptModal';
-import {getDuration} from '../../utils/TimeFunctions'
+import { getDuration } from '../../utils/TimeFunctions';
 
 // This card shows when on loan
 const OnLoanCard = ({ request, action, setLocation, users }) => {
   const user = users.filter(u => request.borrower === u.id)[0];
 
-  const duration = getDuration(request.startDate, request.duration)
+  const duration = getDuration(request.startDate, request.duration);
 
   function launchModal() {
     action(true);
@@ -31,9 +31,13 @@ const OnLoanCard = ({ request, action, setLocation, users }) => {
             : 'Starbucks, 1901 Dempster St'}
         </Card.Description>
       </Card.Content>
-      <Card.Content extra>
+      <Card.Content >
+        <Button fluid color="yellow" basic onClick={() => launchModal()}>
+          Edit additional Details
+        </Button>
+        <br />
         <Button fluid color="yellow" onClick={() => launchModal()}>
-          Additional Details
+          I have passed my game to {user.name}
         </Button>
       </Card.Content>
     </Card>
