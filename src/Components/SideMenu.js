@@ -1,4 +1,4 @@
-import React, { useContext, useRef, createRef } from 'react';
+import React, { useContext} from 'react';
 import { AppState } from '../context';
 import { Link } from 'react-router-dom';
 import {
@@ -8,7 +8,6 @@ import {
   Image,
   Header,
   Rating,
-  Divider,
   Icon,
   Label,
 } from 'semantic-ui-react';
@@ -16,13 +15,7 @@ import PageHeader from './PageHeader';
 
 const SideMenuWrapper = ({ user, content }) => {
   const appState = useContext(AppState);
-  const { menuVisible, setMenuVisible, myRequests } = appState;
-
-  let totalRequests = 0;
-
-  myRequests.forEach(l => {
-    l.requests.forEach(r => totalRequests++);
-  });
+  const { menuVisible, setMenuVisible, myListings } = appState;
 
   const closeMenu = () => setMenuVisible(false);
   return (
@@ -68,14 +61,8 @@ const SideMenuWrapper = ({ user, content }) => {
         <Menu.Item as={Link} to="/lender/myListings" onClick={closeMenu}>
           <Icon name="chess knight" />
           My Listings
+          <Label color="yellow">{myListings.length}</Label>
         </Menu.Item>
-        <Menu.Item as={Link} to="/firestore/requests" onClick={closeMenu}>
-          <Icon name="chess bishop" />
-          Loan Requests
-          <Label color="yellow">{totalRequests}</Label>
-        </Menu.Item>
-        {/* <Menu.Item><Icon name="arrow alternate circle down"/>My Loans</Menu.Item> */}
-        {/* <Menu.Item><Icon name="setting"/>Settings</Menu.Item> */}
       </Sidebar>
       <Sidebar.Pusher dimmed={menuVisible}>
         <PageHeader />

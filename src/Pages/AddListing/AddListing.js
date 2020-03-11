@@ -1,4 +1,4 @@
-import React, { useContext, useState, createRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppState } from '../../context';
 import Game_List from './GameOptions'
 import { Grid, Input, Header, Container } from 'semantic-ui-react';
