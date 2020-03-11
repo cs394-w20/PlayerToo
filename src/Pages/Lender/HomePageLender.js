@@ -4,14 +4,14 @@ import Listings from './Listings';
 import { Link } from 'react-router-dom';
 import { Button, Header, Container, Grid } from 'semantic-ui-react';
 import DeleteModal from './DeleteModal';
-import { deleteListing } from '../../client';
+import { deleteListing, getAllListings } from '../../client';
 
 
 
 const HomePageLender= () => {
   const state = useContext(AppState);
-  const { myListings } = state; 
-  const [modalOpen, setModalOpen]=useState(false)
+  const { myListings, listingCallback } = state; 
+  const [modalOpen, setModalOpen] = useState(false)
   const [listingToDelete, setListingToDelete]=useState({});
   const [relevantListings, setRelevantListings] = useState(myListings)
 
@@ -21,10 +21,11 @@ const HomePageLender= () => {
     setListingToDelete(listing)
   };
 
-  const deleteItem = (listing) => {
+  const deleteItem = async (listing) => {
     const list = relevantListings.filter(listing => listing.id !== listingToDelete.id)
     setRelevantListings(list);
-    deleteListing(listing.id);
+    await deleteListing(listing.id);
+    await getAllListings(listingCallback);
     setModalOpen(false);
   };
 

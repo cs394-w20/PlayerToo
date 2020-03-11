@@ -13,15 +13,18 @@ const StateProvider = ({ children }) => {
   const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
-    getAllListings(setListings);
+    getAllListings(listingCallback);
     getAllGames(setGames);
     getAllUsers(setUsers);
     getGameOptions(setOptions);
     //postListing();
   }, []);
+  
+  let marketplaceListings = [];
+  let myListings = [];
 
-  const marketplaceListings =
-    listings.length > 0 && users.length > 0 && games.length > 0 ?
+  const updateMarketplaceListings = (listings) => {
+    marketplaceListings = listings.length > 0 && users.length > 0 && games.length > 0 ?
       listings.map(
         listing => {
           const user = users[users.findIndex(u => u.id === listing.lender_id)];
@@ -46,21 +49,30 @@ const StateProvider = ({ children }) => {
             }
           }
         }
-      ) : [];
+      ) : []
+  };
+      
+  const updateMyListings = (listings) => {
+    myListings = listings.length > 0 && users.length > 0 && games.length > 0 ?
+    listings.filter(
+      listing => { return listing.lender_id === "Silva91_^" }) : [];
 
+    console.log("myListings", myListings)
+  }
 
-  const myListings =
-    listings.length > 0 && users.length > 0 && games.length > 0 ?
-      listings.filter(
-        listing => { return listing.lender_id === "Silva91_^" }) : [];
-  console.log("this is mylistings for Silva91_^")
-  console.log(myListings)
+  const listingCallback = (newListings) => {
+    setListings(newListings);
+    updateMarketplaceListings(newListings);
+    updateMyListings(newListings);
+  }
 
+  updateMarketplaceListings(listings);
+  updateMyListings(listings);
 
   const myRequests = myListings.length > 0 && users.length > 0 && games.length > 0 ?
     myListings.filter(listings => { return listings.requests.length > 0 }) : [];
 
-  const api = { setMenuVisible, menuVisible, marketplaceListings, myListings, myRequests, games, options, users };
+  const api = { setMenuVisible, menuVisible, marketplaceListings, myListings, myRequests, games, options, users, listingCallback };
   return <Provider value={api}>{children}</Provider>;
 };
 

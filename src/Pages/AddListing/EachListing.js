@@ -2,22 +2,23 @@ import React, { useContext, useState, createRef } from 'react';
 import { AppState } from '../../context';
 import { useParams, Link } from 'react-router-dom';
 import { Grid, Image, Button, Header, Container, Input, Modal } from 'semantic-ui-react';
-import { postListing } from '../../client';
+import { postListing, getAllListings } from '../../client';
 
 const EachListing = () => {
   const appState = useContext(AppState);
 
   // Just using the each listing database. Need to change when integrating backend.
 
-  const { games, myListings } = appState;
+  let { games, myListings, listingCallback } = appState;
   const contextRef = createRef();
   const { id } = useParams();
   const listing = games[games.findIndex(g => g.id === id)];
 
   const [isModalOpen, setIsModalOpen] = useState(null);
   const [details, setDetails] = useState("");
+  const [isReady, setisReady] = useState(false);
   console.log(details)
-  function Add() {
+  const Add = async () => {
     setIsModalOpen(true);
     const body = {
       game_id: listing.id,
@@ -25,14 +26,9 @@ const EachListing = () => {
       additional_details: details,
       requests: []
     };
-    myListings.push({
-      "lender_id": "Silva91_^",
-      "game_id": listing.id,
-      "borrowed": false,
-      "requests": []
-    });
-    postListing(body)
-    console.log(myListings)
+    await postListing(body)
+    await getAllListings(listingCallback)
+    setisReady(true)
   };
 
 
@@ -55,6 +51,7 @@ const EachListing = () => {
             <Grid.Column>
         <Button 
           as={Link}
+          disabled={!isReady}
           to={'../lender/myListings'}
           color="yellow" 
           content="Go to Listings Page" 
