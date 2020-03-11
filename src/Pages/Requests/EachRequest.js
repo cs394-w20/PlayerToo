@@ -53,7 +53,11 @@ const EachRequest = ({ data, games, users }) => {
             </Grid>
           </Card.Content>
           <Card.Content textAlign="center">
-          <Button basic color='green' size="medium" onClick={() => ApproveRequest()}>
+          <Button 
+          as ={Link}
+          basic color='green' 
+          size="medium" 
+          to={`/firestore/confirmation`}>
             Approve
           </Button>
           <Button basic color='red' size="medium" onClick={() => DenyRequest()}>

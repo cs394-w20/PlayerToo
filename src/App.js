@@ -8,7 +8,8 @@ import FireStoreUsersPage from './Pages/FireStoreExamples/FireStoreUsersPage';
 import FireStoreGamesPage from './Pages/FireStoreExamples/FireStoreGamesPage';
 import FireStoreListingsPage from './Pages/FireStoreExamples/FireStoreListingsPage';
 import AddListing from './Pages/AddListing/AddListing';
-import EachLenderListing from './Pages/Lender/EachLenderListing'
+import EachLenderListing from './Pages/Lender/EachLenderListing';
+import RequestConfirmation from './Pages/Requests/RequestConfirmation';
 import { AppState } from './context';
 import { BrowserRouter, Route } from 'react-router-dom';
 import SideMenuWrapper from './Components/SideMenu';
@@ -43,6 +44,7 @@ function App() {
       <Route path="/firestore/games" render={() => <FireStoreGamesPage /> } />
       <Route path="/firestore/listings" render={() => <FireStoreListingsPage /> } />
       <Route path="/firestore/requests" render={() => withHeader(<Request />) } />
+      <Route exact path="/firestore/confirmation" render={()=> withHeader(<RequestConfirmation />)}/>
     </BrowserRouter>
     : <Container><Loader /></Container>
   );
