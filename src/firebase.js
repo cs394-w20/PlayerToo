@@ -4,7 +4,7 @@ import 'firebase/firestore';
 import { apiKey } from './api-key';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBidNTUQUVBZK1AtRohpCLXuWi_9VDbV9A",
+  apiKey: apiKey,
   authDomain: "playertoo-43706.firebaseapp.com",
   databaseURL: "https://playertoo-43706.firebaseio.com",
   projectId: "playertoo-43706",
