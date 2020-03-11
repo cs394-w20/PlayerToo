@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Card, Icon, Header, Button, Image } from 'semantic-ui-react';
-import RequestModal from '../Listing/RequestModal';
+import React from 'react';
+import { Card } from 'semantic-ui-react';
+
 import { Link } from 'react-router-dom';
 
 const Game_List = ({ data }) => {

@@ -9,7 +9,7 @@ const EachListing = () => {
 
   // Just using the each listing database. Need to change when integrating backend.
 
-  let { games, myListings, listingCallback } = appState;
+  let { games, listingCallback } = appState;
   const contextRef = createRef();
   const { id } = useParams();
   const listing = games[games.findIndex(g => g.id === id)];
