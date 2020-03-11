@@ -29,7 +29,7 @@ const OpenRateModal = ({open, change}) => {
       </Grid.Column>
       <Grid.Column width={3}>
      
-  <Rating maxRating={5} defaultRating={3} icon='star' size='massive'/>
+  <Rating maxRating={5} defaultRating={0} icon='star' size='massive'/>
   </Grid.Column>
   <Grid.Column width={3}>
       
@@ -202,9 +202,12 @@ const StatusCard = ({ state }) => {
         setModalOpen={setModalOpen}
         meetUpLocation={meetUplocation}
       />
-      <OpenRateModal open={modalRating} change={setModalRating}></OpenRateModal>
+      <OpenRateModal open={modalRating} change={setModalRating} setRequests={state.setRequests} requests={state.requests}></OpenRateModal>
+     
       <Card.Group centered itemsPerRow="1">
+        
         {approvedRequests.map(r => (
+           
           <OnLoanCard
             key={r.borrower}
             request={r}
