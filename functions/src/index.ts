@@ -19,6 +19,23 @@ const usersCollection = 'Users';
 const listingsCollection = 'Listings';
 const gamesCollection = 'BoardGames';
 
+let games : any = {};
+let users : any = {};
+
+admin.storage().bucket().file("board_games.json")
+    .download(function (err, contents) {
+        if (!err) {
+            games = JSON.parse(contents.toString('utf8'))
+        }
+});
+
+admin.storage().bucket().file("users.json")
+    .download(function (err, contents) {
+        if (!err) {
+            users = JSON.parse(contents.toString('utf8'))
+        }
+});
+
 app.use(cors({ origin: true }));
 main.use(cors({ origin: true }));
 main.use('/api/v1', app);
@@ -60,17 +77,8 @@ app.get('/listings/:listingId', async (req, res) => {
 
         if (listing !== undefined) {
             // joins
-            const gameDoc = await db
-                .collection(gamesCollection)
-                .doc(listing.game_id)
-                .get();
-            listing.game = gameDoc.data();
-
-            const lenderDoc = await db
-                .collection(usersCollection)
-                .doc(listing.lender_id)
-                .get();
-            listing.lender = lenderDoc.data();
+            listing.game = games[listing.game_id];
+            listing.lender = users[listing.lender_id];
         }
 
         res.status(200).send(listing);
@@ -233,17 +241,8 @@ app.get('/listings', async (req, res) => {
         const joinAndReturnData = async () => {
             await Promise.all(
                 listingsData.map(async (listing, i) => {
-                    const gameDoc = await db
-                        .collection(gamesCollection)
-                        .doc(listing.game_id)
-                        .get();
-                    listing.game = gameDoc.data();
-
-                    const lenderDoc = await db
-                        .collection(usersCollection)
-                        .doc(listing.lender_id)
-                        .get();
-                    listing.lender = lenderDoc.data();
+                    listing.game = games[listing.game_id];
+                    listing.lender = users[listing.lender_id];
 
                     listingsData[i] = listing;
                 })
