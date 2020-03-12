@@ -16,9 +16,10 @@ const DeleteModal = ({ open, setModalOpen, deleteItem }) => {
                     content="Yes"
                     negative
                     icon="check"
-                    onClick={() => {
+                    onClick={async () => {
                         setIsLoading(true);
-                        deleteItem();
+                        await deleteItem();
+                        setIsLoading(false);
                     }}
                 />
                 <Button
