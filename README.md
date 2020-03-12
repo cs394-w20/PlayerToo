@@ -1,5 +1,8 @@
 # Player, Too
-A marketplace for lending and borrowing boardgames
+PLayer, Too is a marketplace for lending and borrowing boardgames. It's a one-stop point for all boardgame lovers to rent and share their love for boardgames.
+
+How to use the app:
+Go to the link: https://boar-d6042.firebaseapp.com/ 
 
 ## Available Scripts
 
