@@ -1,10 +1,10 @@
 # Player, Too
-PLayer, Too is a marketplace for lending and borrowing boardgames. It's a one-stop point for all boardgame lovers to rent and share their love for boardgames.
+Player, Too is a marketplace for lending and borrowing boardgames. It's a one-stop point for all boardgame lovers to rent and share their love for boardgames.
 
 How to use the app:
 Go to the link: https://boar-d6042.firebaseapp.com/ 
 
-## Available Scripts
+## Available Scripts for Backend Dev
 
 In the src directory, you can run:
 ### `node -r esm api-scrape.js`
@@ -23,11 +23,18 @@ Generates a new bunch of listings by matching current game_ids and user_ids foun
 
 Migrate generated json files to the fire-store database.
 
+## Available Scripts for Frontend Dev
+
 In the project directory, you can run:
+
+### `npm install`
+
+You should run this command before either of the commands below. 
+This will ensure you have the updated dependencies to view the app correctly. 
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
+This will run the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
@@ -37,8 +44,3 @@ You will also see any lint errors in the console.
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
