@@ -84,6 +84,12 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 Please see the [docs](docs/README.md) for details on the REST API routes implemented using the cloud functions.
 
+## Logs
+Features that were mentioned before the app would be ready for release.
+* Saving personal user information through user authentication.
+* Filter and sort functionality for searching on the marketplace.
+* Securing API routes with JWT or authentication tokens for modifying data
+
 ## Deployment
 
 Add additional notes about how to deploy this on a live system.
