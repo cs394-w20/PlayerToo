@@ -80,6 +80,10 @@ You will also see any lint errors in the console.
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## Documentation
+
+Please see the [docs](docs/README.md) for details on the REST API routes implemented using the cloud functions.
+
 ## Deployment
 
 Add additional notes about how to deploy this on a live system.
