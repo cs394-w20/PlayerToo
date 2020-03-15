@@ -88,7 +88,12 @@ Please see the [docs](docs/README.md) for details on the REST API routes impleme
 Features that were mentioned before the app would be ready for release.
 * Saving personal user information through user authentication.
 * Filter and sort functionality for searching on the marketplace.
-* Securing API routes with JWT or authentication tokens for modifying data
+* Securing API routes with JWT or authentication tokens for modifying data.
+
+## Known bugs and issues
+* Some inconsistent CSS with text in card components in some pages.
+* Application should not be accessed by more than one user at a time, since the app just uses one set user account at the moment. Multiple posts from simultaneous user will lead to confusion due to shared account instance.
+* Possible simplification of states could be made in files such as `context.js` where there is a lot of state assignment.
 
 ## Deployment
 
