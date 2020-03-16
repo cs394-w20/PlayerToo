@@ -15,6 +15,8 @@ What things you need to install the software
 * npm
 * git
 
+###### Note: A Firebase account is required as the project directory is setup specifically following Firebase's standard, using their build configurations, Firebase's sdk, and their cloud/db functions.
+
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
@@ -38,6 +40,41 @@ npm i
 ```
 
 Below, you will find utilities for the project and also the way to start up the local development server. In addition to setting up a firebase project for this.
+
+### Setting up the project and files
+API Keys Setup for firebase and other APIs.
+
+Before starting the development server, be sure to have the API keys setup such that the project is able to function correctly and fetch the appropriate data from firebase. Listed below are step by step directions for getting that running.
+
+Create a file called `api-key.js` in the project `src` directory
+```
+touch api-key.js
+```
+
+Add the following contents inside the file
+```js
+export const apiKey = {YOUR_FIREBASE_API_KEY};
+```
+
+In addition if you wish to scrape a new set of `board_games` data using the scrape script `api-scrape.js` from the `src` directory, request an API key from [Board Game Atlas](https://www.boardgameatlas.com/api/docs) and add the following line following the existing contents in the `api-key.js` file.
+```js
+export const scrapeApiKey = {YOUR_BOARDGAME_ATLAS_API_KEY};
+```
+
+Lastly, in `src/firebase.js`, replace the `firebaseConfig` with the Firebase project configuration. The configuration for your firebase project can be found in the Firebase console, in the left side panel in `Project Overview` under `Project Settings` (On the page, look for Firebase SDK snippet and toggle the Config radio button). To provide an example, this is an example configuration.
+```js
+const firebaseConfig = {
+  apiKey: apiKey,
+  authDomain: "playertoo-43706.firebaseapp.com",
+  databaseURL: "https://playertoo-43706.firebaseio.com",
+  projectId: "playertoo-43706",
+  storageBucket: "playertoo-43706.appspot.com",
+  messagingSenderId: "382880258359",
+  appId: "1:382880258359:web:3ee6699944a42f35c7e2b2",
+  measurementId: "G-L95RXSW981"
+};
+```
+###### Note the apiKey is imported from the `api-key.js` file you created.
 
 ## Available Scripts for Backend Dev
 
@@ -122,7 +159,3 @@ uploadGames().then(() => {
 ## Authors
 
 * [clrpoon](https://github.com/clrpoon), [ut2k](https://github.com/ut2k), [2022karanbhasin](https://github.com/2022karanbhasin), [htmercury](https://github.com/htmercury), [meeeech](https://github.com/meeeech), [omofish](https://github.com/omofish)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
